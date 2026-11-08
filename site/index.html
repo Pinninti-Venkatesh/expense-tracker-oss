@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expense Tracker · every spend, without typing a thing</title>
+  <meta name="description" content="An open-source, self-hosted expense tracker. It reads the alerts your bank already emails you, and keeps your ledger on your own computer or in your own Google Drive.">
+  <meta property="og:title" content="Expense Tracker">
+  <meta property="og:description" content="Open source and self-hosted. Reads your bank's alert emails and keeps your ledger on your computer or in your own Google Drive.">
+  <meta property="og:image" content="/site/screenshots/desktop.png">
+  <meta name="theme-color" content="#f1eef8">
+  <link rel="icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="/site/site.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="/"><span class="mark" aria-hidden="true">₹</span>Expense Tracker</a>
+      <nav class="nav" aria-label="Site">
+        <a class="hide-narrow" href="#how">How it works</a>
+        <a class="hide-narrow" href="#see-it">Watch</a>
+        <a class="hide-narrow" href="#self-host">Self-host</a>
+        <a href="{{GITHUB_URL}}">Source</a>
+        <a class="btn primary small" href="/demo">Live demo</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <ul class="eyebrow" aria-label="About the project">
+            <li>Open source · MIT</li>
+            <li>Self-hosted</li>
+            <li>Your data stays with you</li>
+          </ul>
+          <h1>Every spend, <span class="quiet">without typing a thing.</span></h1>
+          <p class="lede">
+            Your bank already emails you about every card and UPI payment. Expense Tracker reads those alerts,
+            files each spend, and keeps one clear ledger of spends, IOUs and loans in a file you own: on your own computer, or in your own Google Drive.
+          </p>
+          <div class="ctas">
+            <a class="btn primary" href="/demo">Try the live demo</a>
+            <a class="btn soft" href="#self-host">Run your own</a>
+          </div>
+          <p class="fine">The demo uses made-up bank alerts. No sign-in, nothing to install, deleted after an hour.</p>
+        </div>
+
+        <div class="phones" aria-hidden="true">
+          <div class="phone back"><img src="/site/screenshots/loans.png" alt="" width="780" height="1688"></div>
+          <div class="phone front"><img src="/site/screenshots/home.png" alt="" width="780" height="1688"></div>
+          <div class="toast">
+            <div class="from"><span>HDFC Bank · alerts@hdfcbank.net</span><span>now</span></div>
+            <div class="text">Rs.642.00 has been debited on your Credit Card ending 4417 towards SWIGGY BANGALORE IN</div>
+            <div class="read"><span class="chip ok">Filed</span><span class="chip">Food</span><span class="chip">₹642</span><span class="chip">••4417</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="wrap">
+        <p class="kicker">How it works</p>
+        <h2>From the alert in your inbox to a line in your ledger</h2>
+        <p class="sub">No bank logins, no screen-scraping, no SMS permission. It reads the emails your bank sends anyway, and only those.</p>
+
+        <div class="flow">
+          <div class="card">
+            <span class="step">1 · Gmail, read-only</span>
+            <h3>The email your bank already sends</h3>
+            <p>A narrow search finds alerts from bank domains. OTPs, offers and double-sent alerts are screened out before anything is read.</p>
+            <div class="mail">
+              <b>Alert : Update on your HDFC Bank Credit Card</b><br>
+              Dear Asha Rao,<br>
+              Rs.642.00 has been debited on your HDFC Bank Credit Card ending 4417 towards SWIGGY BANGALORE IN on 12 Sep, 2026 at 20:14:05.
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="step">2 · Claude, then a learned format</span>
+            <h3>Read by AI, until it learns the layout</h3>
+            <p>Claude pulls out the details. Once a bank's layout has been read the same way five times, the app reads it on its own and only spot-checks.</p>
+            <dl class="fields">
+              <dt>Amount</dt><dd>₹642.00</dd>
+              <dt>Merchant</dt><dd>Swiggy</dd>
+              <dt>Category</dt><dd>Food</dd>
+              <dt>Card</dt><dd>HDFC ••4417</dd>
+              <dd class="note">✓ Read by a learned format · no AI call</dd>
+            </dl>
+          </div>
+
+          <div class="card">
+            <span class="step">3 · Your ledger</span>
+            <h3>In your ledger, kept by you</h3>
+            <p>Every spend lands in one file per person, on the computer running the app or in that person's own Google Drive. It stays yours if you stop using the app.</p>
+            <div class="ledger-row">
+              <span class="av">Sw</span>
+              <span class="who"><b>Swiggy</b><small>Food · HDFC ••4417</small></span>
+              <span class="amt">₹642</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="see-it">
+      <div class="wrap watch">
+        <div>
+          <p class="kicker">See it</p>
+          <h2>From a fresh install to your spends, in under a minute</h2>
+          <p class="sub">Recorded from the real app, against a made-up inbox. Nothing in it is anyone&rsquo;s real data.</p>
+          <ol class="watch-steps">
+            <li><b>Set it up in the browser.</b> A setup code, your Claude key, your Gmail with an app password.</li>
+            <li><b>Last month, already filed.</b> The first sync reads your alerts back to the 1st of last month.</li>
+            <li><b>New spends arrive on their own.</b> Card and UPI alerts, read as they land.</li>
+            <li><b>Spends, IOUs and loans</b> in one ledger.</li>
+            <li><b>Invite your household</b> with a one-time link, and back it all up in one file.</li>
+          </ol>
+        </div>
+        <div class="phone-video">
+          <video src="/site/media/demo.mp4" poster="/site/media/demo-poster.jpg" width="780" height="1688"
+            autoplay muted loop playsinline controls preload="metadata"
+            aria-label="A walkthrough: setting up the app in the browser, the first sync, a new spend arriving, the Spends, People and Loans screens, inviting someone and backing up."></video>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="kicker">What you get</p>
+        <h2>One ledger for the whole picture</h2>
+        <p class="sub">Built for Indian banks and UPI: rupees, lakhs and the alert formats they actually send.</p>
+
+        <div class="features">
+          <div class="card feature">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></span>
+            <h3>Spends appear on their own</h3>
+            <p>Card and UPI alerts from any bank, checked every 10 minutes. A new account opens on everything since the 1st of last month.</p>
+          </div>
+          <div class="card feature">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14"/><path d="M12 17h.01"/></svg></span>
+            <h3>It asks instead of guessing</h3>
+            <p>An Amazon charge with no item names gets a one-tap "Shopping or Electronics?", and your answer becomes a rule.</p>
+          </div>
+          <div class="card feature">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8"/><path d="M18 14.8c1.8.7 3 2.5 3.5 5.2"/></svg></span>
+            <h3>Splits and IOUs</h3>
+            <p>One balance per person, whether it came from a split bill, a loan to a friend or a cab they paid for.</p>
+          </div>
+          <div class="card feature">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10 12 4l9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20h18"/></svg></span>
+            <h3>Loans that add up</h3>
+            <p>What's still owed, EMIs left, the month you'll be debt-free, and what closing early would save.</p>
+          </div>
+          <div class="card feature">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M10 13h6M10 17h6"/></svg></span>
+            <h3>Statements on demand</h3>
+            <p>Import a bank statement PDF for the UPI spends alerts missed. Its password is used once and never stored.</p>
+          </div>
+          <div class="card feature">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+            <h3>Private on a shared phone</h3>
+            <p>An optional PIN locks the app, and a tap masks every amount on screen.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="glass">
+          <p class="kicker">Where your data lives</p>
+          <h2>The server keeps almost nothing</h2>
+          <p class="sub">You run the server. Your spends never sit in a database, not even yours: each person's are one file, on your computer or in their own Drive.</p>
+          <div class="places">
+            <div class="place">
+              <h3>Your Gmail</h3>
+              <p class="where">Read-only with Google sign-in, or an app password</p>
+              <ul>
+                <li>Searched for bank alerts and statements only</li>
+                <li>Can't send, change or delete email</li>
+              </ul>
+            </div>
+            <div class="place">
+              <h3>Your computer, or your Drive</h3>
+              <p class="where">One file per person</p>
+              <ul>
+                <li>Spends, rules, IOUs, loans and your PIN's hash</li>
+                <li>In Drive, the app can't see any other file</li>
+              </ul>
+            </div>
+            <div class="place">
+              <h3>Your server</h3>
+              <p class="where">Per person: one small record</p>
+              <ul>
+                <li>Google id, email, name and timestamps</li>
+                <li>The Google sign-in token or app password, encrypted with AES-256-GCM</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="self-host">
+      <div class="wrap">
+        <p class="kicker">Self-host</p>
+        <h2>Start it anywhere, set it up in the browser</h2>
+        <p class="sub">One command starts it with nothing to configure. The first screen asks for a setup code, your Claude key and your Gmail; then you invite your household with a link. No Google Cloud project needed.</p>
+        <div class="host">
+          <pre class="terminal"><code><span class="c"># no questions: starts it and prints a setup code</span>
+<span class="p">$ </span>./setup.sh
+<span class="c"># open http://localhost:8080 and follow the screen</span></code></pre>
+          <div class="options">
+            <div class="card option">
+              <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
+              <div><h3>Wherever you like</h3><p>One container and one data folder: your laptop, a home server, a VPS. A laptop that sleeps catches up when it wakes.</p></div>
+            </div>
+            <div class="card option">
+              <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4.5 4.5 0 0 1-.5-9A6 6 0 0 1 18 8a4 4 0 0 1-.5 10z"/></svg></span>
+              <div><h3>Google Cloud, scripted</h3><p>One script in Cloud Shell: a private bucket as the data folder, Cloud Run's free tier and an <code>https://</code> address.</p></div>
+            </div>
+            <div class="card option">
+              <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3"/></svg></span>
+              <div><h3>Move it any time</h3><p>Back up everything in one passphrase-locked file; a new install restores it, saved access and all.</p></div>
+            </div>
+          </div>
+        </div>
+        <p class="fine">Step-by-step guide: <a href="{{GITHUB_URL}}/blob/main/docs/self-hosting.md">docs/self-hosting.md</a></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="kicker">Under the hood</p>
+        <h2>Engineering notes</h2>
+        <p class="sub">A few decisions that shaped the code.</p>
+        <div class="notes">
+          <div class="card note">
+            <h3>Learned formats, never generated code</h3>
+            <p>Asking a model to write a parser per bank means running model-written code on text anyone can email you. Instead, formats are induced from Claude's verified answers by aligning two alerts from the same DKIM-verified sender, then have to agree with Claude five times before they read alone.</p>
+          </div>
+          <div class="card note">
+            <h3>One account per request</h3>
+            <p>Every signed-in request runs inside that account's <code>AsyncLocalStorage</code> context. The ledger store, the Google client and the write queues read the account from there, and throw if there isn't one.</p>
+          </div>
+          <div class="card note">
+            <h3>Timezones that don't lose a morning</h3>
+            <p>"Since the 1st of last month" is midnight in India, not UTC. Computing it in UTC quietly dropped every alert from the first five and a half hours of the month.</p>
+          </div>
+          <div class="card note">
+            <h3>Fakes at the edges</h3>
+            <p>End-to-end suites run the real server with only Google, Claude and Razorpay replaced. Any other network call fails the test. The same fakes power this site's live demo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="open-source">
+      <div class="wrap">
+        <div class="card band">
+          <div>
+            <p class="kicker">Open source</p>
+            <h2 style="margin:0">MIT-licensed. Read it, run it, change it.</h2>
+          </div>
+          <div class="stats">
+            <div class="stat"><b>152</b><span>unit tests</span></div>
+            <div class="stat"><b>45</b><span>end-to-end scenarios</span></div>
+            <div class="stat"><b>1</b><span>file per person</span></div>
+          </div>
+          <a class="btn primary" href="{{GITHUB_URL}}">View the source</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>Built by <a href="https://iamvenkatesh.in">Venkatesh Pinninti</a> · MIT licence</span>
+      <nav aria-label="Footer">
+        <a href="/demo">Live demo</a>
+        <a href="{{GITHUB_URL}}">Source</a>
+        <a href="/privacy">Privacy</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

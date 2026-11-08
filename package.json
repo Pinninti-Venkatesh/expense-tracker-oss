@@ -1,0 +1,41 @@
+{
+  "name": "expense-tracker-oss",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Self-hosted expense tracker: reads bank alert emails from Gmail with Claude, and keeps each person's ledger on your own machine or in their Google Drive",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pinninti-Venkatesh/expense-tracker-oss.git"
+  },
+  "homepage": "https://github.com/Pinninti-Venkatesh/expense-tracker-oss#readme",
+  "type": "module",
+  "main": "server/index.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch --watch-path=./server --watch-path=./.env server/index.js",
+    "test": "node --test \"test/*.test.js\"",
+    "test:e2e": "npm --prefix web run build && node --experimental-test-module-mocks --test --test-force-exit \"e2e/*.e2e.test.js\"",
+    "mock": "npm --prefix web run build && node --experimental-test-module-mocks e2e/serve.js",
+    "demo": "npm --prefix web run build && node --experimental-test-module-mocks e2e/demo.js",
+    "setup:google": "node scripts/setup.mjs",
+    "video": "npm --prefix web run build && node scripts/demo-video.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/bedrock-sdk": "^0.33.5",
+    "@anthropic-ai/sdk": "^0.68.0",
+    "@google-cloud/firestore": "^9.1.0",
+    "dotenv": "^17.0.0",
+    "express": "^5.1.0",
+    "googleapis": "^160.0.0",
+    "imapflow": "^2.2.3",
+    "libmime": "^5.4.6",
+    "pdfjs-dist": "^4.10.38"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "mp4-muxer": "^5.2.2"
+  }
+}

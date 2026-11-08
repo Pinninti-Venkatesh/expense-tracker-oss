@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy — {{PRODUCT_NAME}}</title>
+<style>
+  body { margin: 0; background: #f5f5f3; color: #0b0b0b; font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; padding-inline: 20px; padding-block: 40px; }
+  main { max-width: 44rem; margin: 0 auto; }
+  h1 { font-size: 30px; line-height: 1.15; margin: 0 0 6px; }
+  h2 { font-size: 19px; margin: 32px 0 8px; }
+  p, li { color: #34332f; }
+  ul { padding-left: 22px; }
+  .meta { color: #6b6a65; font-size: 14px; }
+  .draft { background: #fff4d6; border: 1px solid #f0d58a; border-radius: 10px; padding: 12px 14px; font-size: 14px; }
+  mark { background: #ffe08a; padding: 0 3px; border-radius: 3px; }
+  a { color: #2268c4; }
+</style>
+</head>
+<body>
+<main>
+  <p class="draft"><strong>Draft.</strong> This policy is a starting template written to match how the software works. Have it reviewed by a lawyer before accepting real users.</p>
+
+  <h1>Privacy Policy</h1>
+  <p class="meta">{{PRODUCT_NAME}} · operated by {{OPERATOR_NAME}} · effective {{EFFECTIVE_DATE}} · version {{POLICY_VERSION}}</p>
+
+  <h2>The short version</h2>
+  <ul>
+    <li>Your transactions are stored in a file in <strong>your own Google Drive</strong>, not in our database.</li>
+    <li>We read Gmail <strong>read-only</strong>, and only to find bank alerts, bank statements and order confirmations.</li>
+    <li>We never sell your data, never show you ads, and never use your data to train AI models.</li>
+    <li>You can delete your account at any time from the app.</li>
+  </ul>
+
+  <h2>What we access and why</h2>
+  <ul>
+    <li><strong>Your Google account identity</strong> (name, email address, account ID) — to create your account and sign you in.</li>
+    <li><strong>Gmail, read-only</strong> (<code>gmail.readonly</code>) — to find transaction alert emails from banks, bank statement emails you ask us to import, and merchant order confirmations for transactions you choose to look up. We cannot send, modify or delete your email.</li>
+    <li><strong>Google Drive, app files only</strong> (<code>drive.file</code>) — to create and update one ledger file that holds your transactions, categories, loans and settings. We cannot see any other file in your Drive.</li>
+  </ul>
+
+  <h2>What we store on our servers</h2>
+  <ul>
+    <li>Your Google account ID, email address and name.</li>
+    <li>An encrypted Google refresh token, which lets the app check for new bank alerts while you are away.</li>
+    <li>Account bookkeeping: when you signed up, which version of this policy you accepted, whether the last automatic check succeeded, and which onboarding steps you have seen.</li>
+    <li>If you subscribe: your Razorpay subscription ID, plan, status, and the dates your trial ends and your paid period runs until. We never receive or store card numbers, UPI IDs or bank account details.</li>
+  </ul>
+  <p>Your transactions, amounts, merchants and settings are not stored on our servers. They are processed in memory while the app is working and written to the ledger file in your Drive.</p>
+
+  <h2>Shared bank email formats</h2>
+  <p>To read bank alerts without sending them to an AI model every time, the app learns the layout of each bank's alert emails. When at least {{MIN_ACCOUNTS}} accounts have independently learned exactly the same layout, that layout is shared so other accounts' apps can read the same bank's alerts sooner.</p>
+  <ul>
+    <li>What is shared is only the bank's fixed wording and where the amount, merchant and card number appear. Amounts, merchants, card numbers, dates, times and reference numbers are never part of it.</li>
+    <li>Words from your own name and email address are removed before a layout leaves your ledger.</li>
+    <li>Until the threshold is reached, our servers keep only one-way coded fingerprints of a layout and of the accounts that learned it, not the wording itself.</li>
+    <li>Only layouts from recognised bank email domains, verified by Gmail as genuinely sent by the bank, are considered.</li>
+    <li>Your own app still checks every shared layout against the AI model before relying on it, and layouts that prove wrong are withdrawn.</li>
+  </ul>
+
+  <h2>Bank statement passwords</h2>
+  <p>When you import a password-protected bank statement, the password you type is used once to open the PDF and then discarded. It is never saved or logged.</p>
+
+  <h2>Who processes your data for us</h2>
+  <ul>
+    <li><strong>Google Cloud</strong> hosts the app and stores account records.</li>
+    <li data-ai="anthropic"><strong>Anthropic</strong> runs the AI model (Claude) that reads the text of bank alert and order emails to extract the amount, merchant and category, and reads the transaction rows of bank statements you import when their layout isn't one the app already recognises. Anthropic handles these prompts under its commercial terms: they are not used to train models, and are kept for {{AI_RETENTION}} before deletion. Requests may be processed outside your country.</li>
+    <li data-ai="bedrock"><strong>Amazon Web Services (Amazon Bedrock)</strong> runs the AI model (Claude, by Anthropic) that reads the text of bank alert and order emails to extract the amount, merchant and category, and reads the transaction rows of bank statements you import when their layout isn't one the app already recognises. Amazon Bedrock does not store these prompts or share them with the model provider, and they are not used to train models. Requests may be processed in AWS regions outside your country.</li>
+    <li><strong>Razorpay</strong> processes subscription payments. You enter your card, UPI or bank details in Razorpay's own checkout, and Razorpay stores them under its own privacy policy; they never reach our servers. Razorpay tells us the subscription's status and payment dates.</li>
+    <li><strong>Google</strong> provides Gmail and Drive, under your own agreement with Google.</li>
+  </ul>
+
+  <h2>Google API Services User Data Policy</h2>
+  <p>{{PRODUCT_NAME}}'s use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements. Data from Gmail and Drive is used only to provide the features you see in the app. It is not used for advertising, not sold, not used to assess creditworthiness, and not read by people except with your explicit consent for support, where required for security, or to comply with the law.</p>
+
+  <h2>How long we keep data</h2>
+  <ul>
+    <li>Account records, including subscription status, are kept while your account exists and deleted when you delete your account. Deleting your account also cancels a plan that would otherwise renew. Razorpay keeps its own payment records as the law requires.</li>
+    <li>Shared bank email layouts contain no personal data and are kept after an account is deleted.</li>
+    <li>The ledger file stays in your Drive, under your control. When you delete your account you can choose to delete it too.</li>
+    <li>Operational logs contain account IDs and counts, not transaction details, and are kept for up to 30 days.</li>
+  </ul>
+
+  <h2>Your rights</h2>
+  <p>You can see all of your transaction data in the ledger file in your Drive. You can delete your account in the app (Account → Delete account), which revokes our access to your Google account and deletes our record of you. You can also revoke access at any time from your Google Account's security settings. Under India's Digital Personal Data Protection Act, 2023 and similar laws elsewhere, you may ask us about, correct, or erase your personal data, and withdraw consent.</p>
+
+  <h2>Security</h2>
+  <p>Refresh tokens are encrypted with AES-256-GCM. Traffic is encrypted in transit. An optional PIN adds a second lock on top of Google sign-in. No system is perfectly secure; if a breach affects your data, we will notify you and the relevant authorities as the law requires.</p>
+
+  <h2>Children</h2>
+  <p>{{PRODUCT_NAME}} is not intended for anyone under 18.</p>
+
+  <h2>Changes</h2>
+  <p>If this policy changes in a way that affects how your data is used, we will ask for your consent again in the app.</p>
+
+  <h2>Contact and grievances</h2>
+  <p>Questions, requests and complaints: <a href="mailto:{{SUPPORT_EMAIL}}">{{SUPPORT_EMAIL}}</a>. Grievance officer: {{OPERATOR_NAME}}.</p>
+</main>
+</body>
+</html>

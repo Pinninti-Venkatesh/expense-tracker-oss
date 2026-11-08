@@ -1,0 +1,24 @@
+# Run your own copy on any machine with Docker:
+#
+#   ./setup.sh               # starts this, then prints the address and setup code
+#
+# Then open http://localhost:8080 and set it up there. Everything it keeps is
+# in the `expenses-data` volume. Settings in a .env file, if there is one,
+# override what was set in the app. See docs/self-hosting.md.
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATA_DIR: /data
+    volumes:
+      - expenses-data:/data
+    restart: unless-stopped
+
+volumes:
+  expenses-data:

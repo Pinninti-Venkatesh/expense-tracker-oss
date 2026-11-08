@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            web/package-lock.json
+
+      - name: Install
+        run: |
+          npm ci
+          npm --prefix web ci
+
+      - name: Unit tests
+        run: npm test
+
+      # Builds the web app, then runs the real server against fake Google,
+      # Gmail, Drive, Claude and Razorpay: the paid-service configuration,
+      # the self-hosted default, and the public demo.
+      - name: End-to-end tests
+        run: npm run test:e2e
+
+  docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the app image
+        run: docker build -t expenses .
+      - name: The app image starts with no configuration and asks to be set up
+        run: |
+          docker run -d --name app -p 8090:8080 expenses
+          for i in $(seq 1 30); do
+            if curl -fs http://localhost:8090/api/session | grep -q '"needed":true' && docker logs app 2>&1 | grep -q "enter this setup code"; then exit 0; fi
+            sleep 1
+          done
+          docker logs app
+          exit 1
+
+  # Every change on main that passes publishes the image, so anyone can run it
+  # without cloning or building: docker run … ghcr.io/<owner>/<repo>
+  # (for this repository, ghcr.io/pinninti-venkatesh/expense-tracker-oss). Built for
+  # Intel/AMD and ARM (Apple silicon, Raspberry Pi, ARM cloud VMs). New GitHub
+  # packages start private: make it public once in the package's settings.
+  publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [test, docker]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Image name
+        run: echo "IMAGE=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_ENV"
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            ${{ env.IMAGE }}:latest
+            ${{ env.IMAGE }}:${{ github.sha }}

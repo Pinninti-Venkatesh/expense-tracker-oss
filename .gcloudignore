@@ -1,0 +1,6 @@
+# What `gcloud builds submit` / `gcloud run deploy --source` never uploads.
+# Everything git ignores (secrets in .env*, local accounts in data/,
+# node_modules, build output), plus git's own history.
+#!include:.gitignore
+.git
+.gitignore

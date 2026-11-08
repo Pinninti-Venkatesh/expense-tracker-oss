@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy · Expense Tracker</title>
+  <meta name="theme-color" content="#f1eef8">
+  <link rel="icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="/site/site.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="/"><span class="mark" aria-hidden="true">₹</span>Expense Tracker</a>
+      <nav class="nav" aria-label="Site">
+        <a href="{{GITHUB_URL}}">Source</a>
+        <a class="btn primary small" href="/demo">Live demo</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="doc">
+    <h1>Privacy</h1>
+    <p class="updated">Last updated 27 September 2026</p>
+
+    <p>
+      Expense Tracker is open-source software that people run on their own servers. This page covers this website,
+      its live demo, and what the software does with Google data wherever it runs.
+    </p>
+
+    <h2>This website and the demo</h2>
+    <ul>
+      <li>The demo never asks for a Google account. Everyone who tries it gets a private sandbox of made-up bank alerts, which is deleted after an hour.</li>
+      <li>The only cookies are the demo's sign-in cookies, which keep your sandbox open while you use it. There is no analytics, advertising or tracking.</li>
+      <li>The server keeps ordinary request logs for up to 30 days to diagnose problems.</li>
+    </ul>
+
+    <h2>What the software does with Google data</h2>
+    <p>When someone signs in to an installation of Expense Tracker with Google, it asks for three things:</p>
+    <ul>
+      <li><strong>Your name and email address</strong>, to identify your account.</li>
+      <li><strong>Read-only access to Gmail</strong>, used only to find bank transaction alerts and statements. It cannot send, change or delete email.</li>
+      <li><strong>Access to files it creates in your Google Drive</strong>, used to keep your ledger in one file there. It cannot see any other file in your Drive.</li>
+    </ul>
+    <p>
+      The text of bank alert and statement emails is sent to Claude (Anthropic's AI model, through Anthropic's API or
+      Amazon Bedrock, whichever the installation is set up to use) to read the amount, merchant and category. Each
+      installation's sign-in screens name the one it uses. Once the app has learned a bank's alert format, it reads
+      that format itself without the model.
+    </p>
+    <p>
+      The installation's server keeps only your Google account id, email, name, sign-in timestamps and an encrypted
+      Google sign-in token. Your transactions, rules, loans, IOUs and PIN live in your own Drive file.
+    </p>
+
+    <h2>Google API Services User Data Policy</h2>
+    <p>
+      Expense Tracker's use and transfer of information received from Google APIs adheres to the
+      <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>,
+      including the Limited Use requirements. Gmail and Drive data is used only to provide the features you see in the
+      app. It is not used for advertising, not sold, not used to assess creditworthiness, and not read by people.
+    </p>
+
+    <h2>Your control</h2>
+    <ul>
+      <li>Delete your account from the app's settings. You can choose to delete the ledger file in your Drive too.</li>
+      <li>Revoke the app's access at any time at <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.</li>
+      <li>Export every spend as CSV from the app's settings.</li>
+    </ul>
+
+    <h2>Contact</h2>
+    <p>Questions about this website or the software: {{CONTACT}}.</p>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>Built by <a href="https://iamvenkatesh.in">Venkatesh Pinninti</a> · MIT licence</span>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/demo">Live demo</a>
+        <a href="{{GITHUB_URL}}">Source</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
